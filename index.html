@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, user-scalable=no">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="学习中心">
+
+<title>我的学习中心</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #080b10;
+    color: #f5f7fa;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+}
+
+body {
+    min-height: 100vh;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    border: none;
+}
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    margin: auto;
+    padding-bottom: 90px;
+}
+
+/* =========================
+   顶部
+========================= */
+
+.top {
+    padding: 52px 22px 18px;
+}
+
+.greeting {
+    font-size: 15px;
+    color: #8e98a8;
+    margin-bottom: 6px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.date {
+    margin-top: 7px;
+    color: #7f8999;
+    font-size: 14px;
+}
+
+/* =========================
+   页面
+========================= */
+
+.page {
+    display: none;
+    padding: 0 18px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* =========================
+   卡片
+========================= */
+
+.card {
+    background: #11161e;
+    border: 1px solid #1d2530;
+    border-radius: 22px;
+    padding: 20px;
+    margin-bottom: 14px;
+}
+
+.card-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.card-subtitle {
+    color: #8791a0;
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 16px;
+}
+
+/* =========================
+   首页进度
+========================= */
+
+.progress-card {
+    background:
+        linear-gradient(145deg, #151c27, #0d1118);
+    border-radius: 26px;
+    padding: 23px;
+    margin-bottom: 15px;
+    border: 1px solid #222b38;
+}
+
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-number {
+    font-size: 44px;
+    font-weight: 800;
+}
+
+.progress-label {
+    color: #8e98a8;
+    font-size: 13px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 9px;
+    background: #242b35;
+    border-radius: 20px;
+    margin-top: 17px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #4f9cff;
+    border-radius: 20px;
+    transition: width .3s ease;
+}
+
+/* =========================
+   快捷入口
+========================= */
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.quick {
+    background: #11161e;
+    border: 1px solid #1d2530;
+    border-radius: 20px;
+    padding: 18px;
+    min-height: 115px;
+}
+
+.quick-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.quick-title {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.quick-text {
+    color: #7f8999;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* =========================
+   任务
+========================= */
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 0;
+    border-bottom: 1px solid #202731;
+}
+
+.task:last-child {
+    border-bottom: none;
+}
+
+.check {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #46515f;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+}
+
+.task.done .check {
+    background: #4f9cff;
+    border-color: #4f9cff;
+}
+
+.task.done .task-name {
+    text-decoration: line-through;
+    color: #697382;
+}
+
+.task-name {
+    font-size: 15px;
+}
+
+.task-time {
+    margin-left: auto;
+    color: #737d8c;
+    font-size: 12px;
+}
+
+/* =========================
+   阅读中心
+========================= */
+
+.reading-hero {
+    background:
+        linear-gradient(145deg, #151c28, #0c1016);
+    border-radius: 25px;
+    padding: 23px;
+    margin-bottom: 15px;
+    border: 1px solid #222b38;
+}
+
+.reading-label {
+    color: #8d98a7;
+    font-size: 13px;
+}
+
+.reading-title {
+    font-size: 27px;
+    font-weight: 800;
+    margin-top: 7px;
+}
+
+.book {
+    background: #11161e;
+    border: 1px solid #202833;
+    border-radius: 22px;
+    padding: 18px;
+    margin-bottom: 13px;
+}
+
+.book-top {
+    display: flex;
+    gap: 15px;
+}
+
+.book-cover {
+    width: 62px;
+    height: 82px;
+    background: linear-gradient(145deg, #3d4654, #171c24);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    flex-shrink: 0;
+}
+
+.book-info {
+    flex: 1;
+}
+
+.book-name {
+    font-size: 17px;
+    font-weight: 750;
+}
+
+.book-author {
+    color: #7e8897;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.book-progress {
+    margin-top: 14px;
+}
+
+.book-progress-row {
+    display: flex;
+    justify-content: space-between;
+    color: #7e8897;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.small-progress {
+    width: 100%;
+    height: 6px;
+    background: #252d37;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.small-fill {
+    height: 100%;
+    background: #62a7ff;
+    border-radius: 20px;
+}
+
+.book-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.small-btn {
+    background: #202832;
+    color: #e9edf3;
+    border-radius: 11px;
+    padding: 9px 13px;
+    font-size: 12px;
+}
+
+.delete-btn {
+    color: #ff6b6b;
+}
+
+/* =========================
+   输入框
+========================= */
+
+.input {
+    width: 100%;
+    padding: 14px 15px;
+    background: #0b0f15;
+    color: white;
+    border: 1px solid #29313d;
+    border-radius: 13px;
+    outline: none;
+    font-size: 15px;
+    margin-bottom: 11px;
+}
+
+.input:focus {
+    border-color: #4f9cff;
+}
+
+.add-btn {
+    width: 100%;
+    background: #4f9cff;
+    color: white;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* =========================
+   学习模块
+========================= */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.stat {
+    background: #11161e;
+    border: 1px solid #202833;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.stat-label {
+    color: #7f8999;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* =========================
+   目标
+========================= */
+
+.goal {
+    margin-bottom: 17px;
+}
+
+.goal-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.goal-name {
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.goal-percent {
+    color: #7f8999;
+    font-size: 12px;
+}
+
+.goal-bar {
+    height: 8px;
+    background: #252d37;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.goal-fill {
+    height: 100%;
+    background: #5da6ff;
+    border-radius: 20px;
+}
+
+/* =========================
+   底部导航
+========================= */
+
+.bottom-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    width: calc(100% - 24px);
+    max-width: 495px;
+    height: 70px;
+    background: rgba(20,25,32,.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid #29313c;
+    border-radius: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    z-index: 100;
+    box-shadow: 0 10px 35px rgba(0,0,0,.4);
+}
+
+.nav-btn {
+    background: transparent;
+    color: #747e8c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 10px;
+}
+
+.nav-icon {
+    font-size: 22px;
+}
+
+.nav-btn.active {
+    color: #5da6ff;
+}
+
+/* =========================
+   空状态
+========================= */
+
+.empty {
+    text-align: center;
+    color: #717b8a;
+    padding: 25px 10px;
+    font-size: 13px;
+}
+
+/* =========================
+   动画
+========================= */
+
+.page.active {
+    animation: appear .22s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 600px) {
+    body {
+        background: #020407;
+    }
+
+    .app {
+        border-left: 1px solid #151a22;
+        border-right: 1px solid #151a22;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =========================
+         首页
+    ========================== -->
+
+    <div id="home" class="page active">
+
+        <div class="top">
+            <div class="greeting">晚上好 👋</div>
+            <div class="title">我的学习中心</div>
+            <div class="date" id="todayDate"></div>
+        </div>
+
+        <div class="progress-card">
+
+            <div class="progress-top">
+                <div>
+                    <div class="progress-label">今日学习进度</div>
+                    <div class="progress-number" id="homeProgress">
+                        0%
+                    </div>
+                </div>
+
+                <div style="font-size:42px;">🎯</div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill"
+                     id="homeProgressBar"></div>
+            </div>
+
+        </div>
+
+        <div class="quick-grid">
+
+            <div class="quick"
+                 onclick="showPage('study')">
+
+                <div class="quick-icon">📚</div>
+
+                <div class="quick-title">
+                    学习计划
+                </div>
+
+                <div class="quick-text">
+                    管理今天的学习
+                </div>
+
+            </div>
+
+            <div class="quick"
+                 onclick="showPage('reading')">
+
+                <div class="quick-icon">📖</div>
+
+                <div class="quick-title">
+                    阅读中心
+                </div>
+
+                <div class="quick-text">
+                    我的书单与进度
+                </div>
+
+            </div>
+
+            <div class="quick"
+                 onclick="showPage('goals')">
+
+                <div class="quick-icon">🎯</div>
+
+                <div class="quick-title">
+                    我的目标
+                </div>
+
+                <div class="quick-text">
+                    长期目标管理
+                </div>
+
+            </div>
+
+            <div class="quick"
+                 onclick="showPage('stats')">
+
+                <div class="quick-icon">📊</div>
+
+                <div class="quick-title">
+                    学习数据
+                </div>
+
+                <div class="quick-text">
+                    查看学习状态
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                今日任务
+            </div>
+
+            <div id="homeTasks"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         学习
+    ========================== -->
+
+    <div id="study" class="page">
+
+        <div class="top">
+            <div class="greeting">Today</div>
+            <div class="title">学习计划</div>
+            <div class="date">
+                专注今天，慢慢变强。
+            </div>
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                今日任务
+            </div>
+
+            <div id="studyTasks"></div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                学习建议
+            </div>
+
+            <div style="
+                color:#9aa4b3;
+                font-size:14px;
+                line-height:1.8;
+            ">
+                不需要一天完成所有事情。
+                <br>
+                先完成最重要的一件。
+                <br>
+                保持每天进步一点点。
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         阅读中心
+    ========================== -->
+
+    <div id="reading" class="page">
+
+        <div class="top">
+            <div class="greeting">Reading Center</div>
+            <div class="title">阅读中心</div>
+            <div class="date">
+                读书，让自己拥有更多选择。
+            </div>
+        </div>
+
+        <div class="reading-hero">
+
+            <div class="reading-label">
+                当前阅读
+            </div>
+
+            <div class="reading-title"
+                 id="currentBookTitle">
+                开始你的阅读
+            </div>
+
+            <div style="
+                color:#7f8999;
+                margin-top:7px;
+                font-size:13px;
+            ">
+                每天阅读一点点
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                我的书架
+            </div>
+
+            <div id="bookList"></div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                添加一本书
+            </div>
+
+            <input
+                id="bookName"
+                class="input"
+                placeholder="书名">
+
+            <input
+                id="bookAuthor"
+                class="input"
+                placeholder="作者">
+
+            <input
+                id="bookProgress"
+                class="input"
+                type="number"
+                min="0"
+                max="100"
+                placeholder="阅读进度 0 - 100">
+
+            <button
+                class="add-btn"
+                onclick="addBook()">
+                ＋ 添加到书架
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         学习数据
+    ========================== -->
+
+    <div id="stats" class="page">
+
+        <div class="top">
+            <div class="greeting">Your Progress</div>
+            <div class="title">学习数据</div>
+            <div class="date">
+                看见自己的进步。
+            </div>
+        </div>
+
+        <div class="stat-grid">
+
+            <div class="stat">
+                <div class="stat-number"
+                     id="statCompleted">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    完成任务
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number">
+                    7
+                </div>
+
+                <div class="stat-label">
+                    连续学习天数
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number"
+                     id="statBooks">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    阅读书籍
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number"
+                     id="statReading">
+                    0%
+                </div>
+
+                <div class="stat-label">
+                    平均阅读进度
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card" style="margin-top:14px;">
+
+            <div class="card-title">
+                今天的状态
+            </div>
+
+            <div style="
+                color:#8e98a8;
+                font-size:14px;
+                line-height:1.8;
+            ">
+                学习不是和别人比赛。
+                <br>
+                今天比昨天多走一步，
+                就已经很棒了。
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         目标
+    ========================== -->
+
+    <div id="goals" class="page">
+
+        <div class="top">
+            <div class="greeting">Long Term</div>
+            <div class="title">我的目标</div>
+            <div class="date">
+                把未来拆成今天。
+            </div>
+        </div>
+
+        <div class="card">
+
+            <div class="goal">
+
+                <div class="goal-row">
+                    <div class="goal-name">
+                        📚 阅读 12 本书
+                    </div>
+
+                    <div class="goal-percent">
+                        25%
+                    </div>
+                </div>
+
+                <div class="goal-bar">
+                    <div class="goal-fill"
+                         style="width:25%">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="goal">
+
+                <div class="goal-row">
+                    <div class="goal-name">
+                        🧠 提升英语能力
+                    </div>
+
+                    <div class="goal-percent">
+                        40%
+                    </div>
+                </div>
+
+                <div class="goal-bar">
+                    <div class="goal-fill"
+                         style="width:40%">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="goal">
+
+                <div class="goal-row">
+                    <div class="goal-name">
+                        💻 学习编程
+                    </div>
+
+                    <div class="goal-percent">
+                        15%
+                    </div>
+                </div>
+
+                <div class="goal-bar">
+                    <div class="goal-fill"
+                         style="width:15%">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                给未来的自己
+            </div>
+
+            <div style="
+                font-size:22px;
+                font-weight:700;
+                line-height:1.5;
+            ">
+                “不要着急，
+                <br>
+                你正在成为更好的自己。”
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     底部导航
+========================== -->
+
+<div class="bottom-nav">
+
+    <button
+        class="nav-btn active"
+        onclick="showPage('home')"
+        id="nav-home">
+
+        <div class="nav-icon">⌂</div>
+        <div>首页</div>
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="showPage('study')"
+        id="nav-study">
+
+        <div class="nav-icon">✓</div>
+        <div>学习</div>
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="showPage('reading')"
+        id="nav-reading">
+
+        <div class="nav-icon">📖</div>
+        <div>阅读</div>
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="showPage('stats')"
+        id="nav-stats">
+
+        <div class="nav-icon">◉</div>
+        <div>数据</div>
+
+    </button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   数据
+========================= */
+
+let tasks = JSON.parse(
+    localStorage.getItem("studyTasks")
+) || [
+
+    {
+        name: "英语学习 30 分钟",
+        time: "30 min",
+        done: false
+    },
+
+    {
+        name: "数学练习",
+        time: "45 min",
+        done: false
+    },
+
+    {
+        name: "阅读 20 分钟",
+        time: "20 min",
+        done: false
+    },
+
+    {
+        name: "复习今天的知识",
+        time: "15 min",
+        done: false
+    }
+
+];
+
+
+let books = JSON.parse(
+    localStorage.getItem("studyBooks")
+) || [
+
+    {
+        name: "Atomic Habits",
+        author: "James Clear",
+        progress: 35
+    },
+
+    {
+        name: "The Psychology of Money",
+        author: "Morgan Housel",
+        progress: 15
+    }
+
+];
+
+
+/* =========================
+   页面切换
+========================= */
+
+function showPage(page) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p => {
+            p.classList.remove("active");
+        });
+
+    const target =
+        document.getElementById(page);
+
+    if (target) {
+        target.classList.add("active");
+    }
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+    const nav =
+        document.getElementById("nav-" + page);
+
+    if (nav) {
+        nav.classList.add("active");
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    renderAll();
+}
+
+
+/* =========================
+   日期
+========================= */
+
+function updateDate() {
+
+    const now = new Date();
+
+    const days = [
+        "星期日",
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六"
+    ];
+
+    const dateText =
+        now.getFullYear() +
+        "年" +
+        (now.getMonth() + 1) +
+        "月" +
+        now.getDate() +
+        "日 · " +
+        days[now.getDay()];
+
+    document.getElementById(
+        "todayDate"
+    ).innerText = dateText;
+
+}
+
+
+/* =========================
+   任务
+========================= */
+
+function toggleTask(index) {
+
+    tasks[index].done =
+        !tasks[index].done;
+
+    localStorage.setItem(
+        "studyTasks",
+        JSON.stringify(tasks)
+    );
+
+    renderAll();
+}
+
+
+function taskHTML(index) {
+
+    const task = tasks[index];
+
+    return `
+
+        <div class="task ${task.done ? "done" : ""}"
+             onclick="toggleTask(${index})">
+
+            <div class="check">
+                ${task.done ? "✓" : ""}
+            </div>
+
+            <div class="task-name">
+                ${escapeHTML(task.name)}
+            </div>
+
+            <div class="task-time">
+                ${escapeHTML(task.time)}
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+function renderTasks() {
+
+    const html =
+        tasks.length
+        ? tasks.map((_, i) => taskHTML(i)).join("")
+        : `<div class="empty">
+                今天还没有任务
+           </div>`;
+
+    document.getElementById(
+        "homeTasks"
+    ).innerHTML = html;
+
+    document.getElementById(
+        "studyTasks"
+    ).innerHTML = html;
+
+}
+
+
+/* =========================
+   总体进度
+========================= */
+
+function updateProgress() {
+
+    const total = tasks.length;
+
+    const completed =
+        tasks.filter(t => t.done).length;
+
+    const percent =
+        total === 0
+        ? 0
+        : Math.round(
+            completed / total * 100
+        );
+
+    document.getElementById(
+        "homeProgress"
+    ).innerText = percent + "%";
+
+    document.getElementById(
+        "homeProgressBar"
+    ).style.width = percent + "%";
+
+    document.getElementById(
+        "statCompleted"
+    ).innerText = completed;
+
+}
+
+
+/* =========================
+   阅读中心
+========================= */
+
+function renderBooks() {
+
+    const list =
+        document.getElementById(
+            "bookList"
+        );
+
+    if (!books.length) {
+
+        list.innerHTML =
+            `<div class="empty">
+                书架还是空的。
+                <br>
+                添加你的第一本书吧 📖
+             </div>`;
+
+        document.getElementById(
+            "currentBookTitle"
+        ).innerText =
+            "开始你的阅读";
+
+        return;
+    }
+
+
+    const current =
+        books[0];
+
+    document.getElementById(
+        "currentBookTitle"
+    ).innerText =
+        current.name;
+
+
+    list.innerHTML =
+        books.map((book, index) => `
+
+        <div class="book">
+
+            <div class="book-top">
+
+                <div class="book-cover">
+                    📖
+                </div>
+
+                <div class="book-info">
+
+                    <div class="book-name">
+                        ${escapeHTML(book.name)}
+                    </div>
+
+                    <div class="book-author">
+                        ${escapeHTML(book.author || "未知作者")}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="book-progress">
+
+                <div class="book-progress-row">
+
+                    <span>
+                        阅读进度
+                    </span>
+
+                    <span>
+                        ${book.progress}%
+                    </span>
+
+                </div>
+
+                <div class="small-progress">
+
+                    <div
+                        class="small-fill"
+                        style="width:${book.progress}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="book-buttons">
+
+                <button
+                    class="small-btn"
+                    onclick="changeBookProgress(${index}, 5)">
+                    +5%
+                </button>
+
+                <button
+                    class="small-btn"
+                    onclick="changeBookProgress(${index}, -5)">
+                    -5%
+                </button>
+
+                <button
+                    class="small-btn delete-btn"
+                    onclick="deleteBook(${index})">
+                    删除
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+function addBook() {
+
+    const name =
+        document.getElementById(
+            "bookName"
+        ).value.trim();
+
+    const author =
+        document.getElementById(
+            "bookAuthor"
+        ).value.trim();
+
+    let progress =
+        Number(
+            document.getElementById(
+                "bookProgress"
+            ).value
+        );
+
+    if (!name) {
+        alert("请输入书名");
+        return;
+    }
+
+    if (isNaN(progress)) {
+        progress = 0;
+    }
+
+    progress =
+        Math.max(
+            0,
+            Math.min(100, progress)
+        );
+
+
+    books.push({
+        name,
+        author,
+        progress
+    });
+
+
+    localStorage.setItem(
+        "studyBooks",
+        JSON.stringify(books)
+    );
+
+
+    document.getElementById(
+        "bookName"
+    ).value = "";
+
+    document.getElementById(
+        "bookAuthor"
+    ).value = "";
+
+    document.getElementById(
+        "bookProgress"
+    ).value = "";
+
+
+    renderAll();
+
+}
+
+
+function changeBookProgress(index, amount) {
+
+    books[index].progress =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                books[index].progress + amount
+            )
+        );
+
+    localStorage.setItem(
+        "studyBooks",
+        JSON.stringify(books)
+    );
+
+    renderAll();
+
+}
+
+
+function deleteBook(index) {
+
+    if (!confirm("确定删除这本书吗？")) {
+        return;
+    }
+
+    books.splice(index, 1);
+
+    localStorage.setItem(
+        "studyBooks",
+        JSON.stringify(books)
+    );
+
+    renderAll();
+
+}
+
+
+/* =========================
+   阅读统计
+========================= */
+
+function updateBookStats() {
+
+    document.getElementById(
+        "statBooks"
+    ).innerText = books.length;
+
+    if (!books.length) {
+
+        document.getElementById(
+            "statReading"
+        ).innerText = "0%";
+
+        return;
+    }
+
+    const average =
+        Math.round(
+            books.reduce(
+                (sum, book) =>
+                    sum + book.progress,
+                0
+            ) / books.length
+        );
+
+    document.getElementById(
+        "statReading"
+    ).innerText =
+        average + "%";
+
+}
+
+
+/* =========================
+   防止 HTML 注入
+========================= */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================
+   全部刷新
+========================= */
+
+function renderAll() {
+
+    renderTasks();
+
+    updateProgress();
+
+    renderBooks();
+
+    updateBookStats();
+
+}
+
+
+/* =========================
+   启动
+========================= */
+
+updateDate();
+
+renderAll();
+
+</script>
+
+</body>
+</html>
